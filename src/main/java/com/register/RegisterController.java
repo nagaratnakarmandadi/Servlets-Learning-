@@ -32,10 +32,10 @@ public class RegisterController extends HttpServlet {
 		StudentDao sd = new StudentDao();
 		status = sd.insertUser(s);
 		if (status.equals("success")) {
-			RequestDispatcher rd = request.getRequestDispatcher("login.html");
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.forward(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("index.html");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		}
 	}
