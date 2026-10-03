@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background: #f2f4f7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
+
+.container {
+	background: white;
+	width: 450px;
+	padding: 40px;
+	border-radius: 12px;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+	text-align: center;
+}
+
+h1 {
+	color: #2563eb;
+	margin-bottom: 15px;
+}
+
+p {
+	color: #555;
+	font-size: 16px;
+}
+</style>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h1>
+			Welcome to
+			<%=session.getAttribute("un")%>
+		</h1>
+
+		<a href="./project.jsp"> Project
+		</a>
+
+		<p>Login successful!</p>
+
+	</div>
+
+</body>
+</html>
