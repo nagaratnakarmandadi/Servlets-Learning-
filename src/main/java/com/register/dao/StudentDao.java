@@ -3,6 +3,8 @@ package com.register.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.register.model.Student;
 import com.register.model.StudentLogin;
@@ -52,6 +54,38 @@ public class StudentDao implements StudentDaoInterface {
 		}
 		return status;
 
+	}
+
+	@Override
+	public List<Student> getAllStudents() {
+
+		List<Student> students = new ArrayList<>();
+
+		try {
+			DBConnection db = new DBConnection();
+			con = db.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("select username, firstname, lastname, password from register");
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				Student s = new Student();
+
+				s.setUserName(rs.getString("username"));
+				s.setFirstName(rs.getString("firstname"));
+				s.setLastName(rs.getString("lastname"));
+				s.setPassword(rs.getString("password"));
+
+				students.add(s);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return students;
 	}
 
 }

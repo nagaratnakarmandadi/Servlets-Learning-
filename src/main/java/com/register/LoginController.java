@@ -38,8 +38,7 @@ public class LoginController extends HttpServlet {
 
 			if (username.equals("admin")) {
 
-				RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-				rd.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/AdminController");
 
 			} else {
 
