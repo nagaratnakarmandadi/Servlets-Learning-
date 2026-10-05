@@ -88,4 +88,90 @@ public class StudentDao implements StudentDaoInterface {
 		return students;
 	}
 
+	@Override
+
+	public String updateStudent(Student s) {
+
+		try {
+			DBConnection db = new DBConnection();
+			con = db.getConnection();
+
+			PreparedStatement ps = con
+					.prepareStatement("UPDATE register SET firstname=?, lastname=?, password=? WHERE username=?");
+
+			ps.setString(1, s.getFirstName());
+			ps.setString(2, s.getLastName());
+			ps.setString(3, s.getPassword());
+			ps.setString(4, s.getUserName());
+
+			int n = ps.executeUpdate();
+
+			if (n > 0) {
+				status = "success";
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return status;
+	}
+
+	@Override
+	public String deleteStudent(String username) {
+
+		try {
+			DBConnection db = new DBConnection();
+			con = db.getConnection();
+
+			PreparedStatement ps = con.prepareStatement("DELETE FROM register WHERE username=?");
+
+			ps.setString(1, username);
+
+			int n = ps.executeUpdate();
+
+			if (n > 0) {
+				status = "success";
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return status;
+	}
+
+	@Override
+	public Student getStudentByUsername(String username) {
+
+		Student s = null;
+
+		try {
+			DBConnection db = new DBConnection();
+			con = db.getConnection();
+
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT username, firstname, lastname, password " + "FROM register WHERE username=?");
+
+			ps.setString(1, username);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+
+				s = new Student();
+
+				s.setUserName(rs.getString("username"));
+				s.setFirstName(rs.getString("firstname"));
+				s.setLastName(rs.getString("lastname"));
+				s.setPassword(rs.getString("password"));
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return s;
+	}
+
 }

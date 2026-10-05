@@ -7,7 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+
 <title>Admin Dashboard</title>
 
 <style>
@@ -29,7 +31,7 @@ body {
 
 .container {
 	width: 90%;
-	max-width: 1100px;
+	max-width: 1200px;
 	margin: 40px auto;
 }
 
@@ -38,6 +40,7 @@ body {
 	padding: 25px;
 	border-radius: 12px;
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+	overflow-x: auto;
 }
 
 table {
@@ -60,6 +63,37 @@ td {
 
 tr:hover {
 	background: #f5f5f5;
+}
+
+.actions {
+	white-space: nowrap;
+}
+
+.update-btn {
+	background: #16a34a;
+	color: white;
+	border: none;
+	padding: 8px 14px;
+	border-radius: 6px;
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+.update-btn:hover {
+	background: #15803d;
+}
+
+.delete-btn {
+	background: #dc2626;
+	color: white;
+	border: none;
+	padding: 8px 14px;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.delete-btn:hover {
+	background: #b91c1c;
 }
 </style>
 
@@ -88,6 +122,7 @@ tr:hover {
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Password</th>
+					<th>Actions</th>
 				</tr>
 
 				<%
@@ -95,10 +130,36 @@ tr:hover {
 				%>
 
 				<tr>
+
+					<!-- Username -->
 					<td><%=s.getUserName()%></td>
+
+					<!-- First Name -->
 					<td><%=s.getFirstName()%></td>
+
+					<!-- Last Name -->
 					<td><%=s.getLastName()%></td>
+
+					<!-- Password -->
 					<td><%=s.getPassword()%></td>
+
+					<!-- Actions -->
+					<td class="actions">
+						<!-- Update --> <a
+						href="${pageContext.request.contextPath}/UpdateStudentController?username=<%= s.getUserName() %>">
+
+							<button type="button" class="update-btn">Update</button>
+
+					</a> <!-- Delete --> <a
+						href="${pageContext.request.contextPath}/DeleteController?username=<%= s.getUserName() %>"
+						onclick="return confirm('Are you sure you want to delete this user?');">
+
+							<button type="button" class="delete-btn">Delete</button>
+
+					</a>
+
+					</td>
+
 				</tr>
 
 				<%
