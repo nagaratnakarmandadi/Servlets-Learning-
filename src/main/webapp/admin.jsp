@@ -19,22 +19,42 @@ body {
 	margin: 0;
 }
 
+/* Header */
 .header {
 	background: #1e293b;
 	color: white;
 	padding: 20px 40px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .header h1 {
 	margin: 0;
 }
 
+/* Logout button */
+.logout-btn {
+	background: #dc2626;
+	color: white;
+	padding: 10px 18px;
+	border-radius: 6px;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.logout-btn:hover {
+	background: #b91c1c;
+}
+
+/* Main container */
 .container {
 	width: 90%;
 	max-width: 1200px;
 	margin: 40px auto;
 }
 
+/* Table container */
 .table-container {
 	background: white;
 	padding: 25px;
@@ -49,6 +69,7 @@ table {
 	margin-top: 20px;
 }
 
+/* Table header */
 th {
 	background: #2563eb;
 	color: white;
@@ -56,6 +77,7 @@ th {
 	text-align: left;
 }
 
+/* Table data */
 td {
 	padding: 12px;
 	border-bottom: 1px solid #ddd;
@@ -65,10 +87,12 @@ tr:hover {
 	background: #f5f5f5;
 }
 
+/* Actions */
 .actions {
 	white-space: nowrap;
 }
 
+/* Update button */
 .update-btn {
 	background: #16a34a;
 	color: white;
@@ -83,6 +107,7 @@ tr:hover {
 	background: #15803d;
 }
 
+/* Delete button */
 .delete-btn {
 	background: #dc2626;
 	color: white;
@@ -101,9 +126,19 @@ tr:hover {
 
 <body>
 
+	<!-- Header -->
+
 	<div class="header">
+
 		<h1>Admin Dashboard</h1>
+
+		<a href="${pageContext.request.contextPath}/LogoutController"
+			class="logout-btn"> Logout </a>
+
 	</div>
+
+
+	<!-- Main Content -->
 
 	<div class="container">
 
@@ -115,15 +150,23 @@ tr:hover {
 			List<Student> students = (List<Student>) request.getAttribute("students");
 			%>
 
+
 			<table>
 
 				<tr>
+
 					<th>Username</th>
+
 					<th>First Name</th>
+
 					<th>Last Name</th>
+
 					<th>Password</th>
+
 					<th>Actions</th>
+
 				</tr>
+
 
 				<%
 				for (Student s : students) {
@@ -131,19 +174,14 @@ tr:hover {
 
 				<tr>
 
-					<!-- Username -->
 					<td><%=s.getUserName()%></td>
 
-					<!-- First Name -->
 					<td><%=s.getFirstName()%></td>
 
-					<!-- Last Name -->
 					<td><%=s.getLastName()%></td>
 
-					<!-- Password -->
 					<td><%=s.getPassword()%></td>
 
-					<!-- Actions -->
 					<td class="actions">
 						<!-- Update --> <a
 						href="${pageContext.request.contextPath}/UpdateStudentController?username=<%= s.getUserName() %>">
@@ -173,4 +211,5 @@ tr:hover {
 	</div>
 
 </body>
+
 </html>
